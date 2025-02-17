@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User{
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   email String @unique
   name String
   password String
@@ -25,23 +25,23 @@ model User{
 }
 
 model Questions {
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   title String
   body String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId String
+  userId Int
   user User @relation(fields: [userId], references: [id])
   answers Answers[]  
 }
 
 model Answers{
-  id String @id @default(uuid())
+  id Int @default(autoincrement()) @id
   body String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId String
-  questionId String
+  userId Int
+  questionId Int
   user User @relation(fields: [userId], references: [id])
   question Questions @relation(fields: [questionId], references: [id])
 
